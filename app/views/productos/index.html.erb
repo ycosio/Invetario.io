@@ -1,3 +1,88 @@
-<%= @productos.inspect%>
+<div class="container">
+<h1>Administración de productos</h1><br>
 
-<script type="text/javascript">$("#menu2").addClass("active");</script>
+  <h3>Registro de productos</h3><br>
+    
+  <%= form_for @producto, url: "/productos" do |f| %>
+    <div>
+        <%= label_tag(:n, "Nombre:") %> <br>
+        <%= f.text_field :nombre, placeholder:"Nombre" %>
+    </div>
+    <div>
+    	<%= label_tag(:m, "Marca:") %> <br>
+		<%= f.select :id_marca,  options_from_collection_for_select(@marcas, 'id', 'nombre') %>
+    </div>
+     <div>
+        <%= label_tag(:d, "Descripción:") %> <br>
+        <%= f.text_area :descripcion, placeholder:"Descripción", cols: 22, rows: 3, style:"resize:none" %>
+    </div>
+     <div>
+        <%= label_tag(:p, "Precio en pesos:") %> <br>
+        <%= f.text_field :precio_pesos, placeholder:"Precio" %>
+    </div>
+
+    <% @producto.errors.full_messages.each do |message| %>
+    <div class="text-danger">
+        * <%= message %>
+    </div>
+    <% end %>
+  
+    <div style="padding-top: 1em; padding-bottom: 1em">    
+      <%= f.submit "Rregistrar", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <h3>Listado de productos</h3><br>
+    
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Marca</th>
+        <th>Descripción</th>
+        <th>Pesos</th>
+        <th>Dolares</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% i=0 %>
+    <% @productos.each do |producto| %>
+      <tr>
+        <td class="text-justify text-center"><%= producto.nombre %></td>
+        <td class="text-center"><%= @marca[i].nombre %></td>
+        <td class="text-justify text-center"><%= producto.descripcion %></td>
+        <td class="text-center">$<%= producto.precio_pesos %></td>
+        <td class="text-center"><%= producto.precio_dolares %></td>
+        <td class="text-center"><%= link_to "Modificar","productos/#{producto.id}/edit" %></td>
+        <td class="text-center"><%= link_to "Eliminar","productos/delete/#{producto.id}", onclick:"confirmacion()" %></td>
+      </tr>
+      <% i += 1 %>
+    <%end%>
+    <tr>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+    	<td></td>
+        <td><strong>Suma de precios: $<%= @suma_precios %></strong></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	$("#menu2").addClass("active");
+});
+
+function confirmacion(){ 
+    if (!confirm('¿Estas seguro de realizar esta acción?')){ 
+       event.preventDefault();
+    } 
+} 
+</script>

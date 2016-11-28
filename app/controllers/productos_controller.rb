@@ -35,6 +35,7 @@ class ProductosController < ApplicationController
 
   def edit
   	@marcas = Marca.select("id","nombre")
+  	@marca = Marca.joins("INNER JOIN productos ON marcas.id = productos.id_marca WHERE productos.id=#{params[:id]}")
   	@producto = Producto.find(params[:id])
   end
 

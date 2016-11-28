@@ -1,0 +1,54 @@
+
+<div class="container">
+  <h1>Administración de marcas</h1><br>
+    
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @marcas.each do |marca| %>
+      <tr>
+        <td><%= marca.nombre %></td>
+        <td><%= link_to "Modificar","marca/#{marca.id}/edit" %></td>
+        <td><%= link_to "Eliminar","marca/delete/#{marca.id}", onclick:"confirmacion()" %></td>
+      </tr>
+    <%end%>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>Registro de marcas</h3><br>
+    
+  <%= form_for @marca, url: "/marca" do |f| %>
+    <div>
+        <%= label_tag(:l, "Nombre:") %> <br>
+        <%= f.text_field :nombre, placeholder:"Nombre" %>
+        <div>
+      <%= f.submit "Rregistrar" %>
+    </div>
+    </div>
+  <% end %>
+
+   <% @marca.errors.full_messages.each do |message| %>
+    <div class="text-danger">
+        * <%= message %>
+    </div>
+    <% end %>
+
+</div>
+
+<script type="text/javascript">
+$("#menu1").addClass("active");
+
+function confirmacion(){ 
+    if (!confirm('¿Estas seguro de realizar esta acción?')){ 
+       event.preventDefault();
+    } 
+} 
+</script>

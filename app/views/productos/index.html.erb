@@ -6,19 +6,19 @@
   <%= form_for @producto, url: "/productos" do |f| %>
     <div>
         <%= label_tag(:n, "Nombre:") %> <br>
-        <%= f.text_field :nombre, placeholder:"Nombre" %>
+        <%= f.text_field :nombre, placeholder:"Nombre", class:"form-control" %>
     </div>
     <div>
     	<%= label_tag(:m, "Marca:") %> <br>
-		<%= f.select :id_marca,  options_from_collection_for_select(@marcas, 'id', 'nombre') %>
+		<%= f.select :id_marca,  options_from_collection_for_select(@marcas, 'id', 'nombre'), {}, class:"form-control" %>
     </div>
      <div>
         <%= label_tag(:d, "Descripción:") %> <br>
-        <%= f.text_area :descripcion, placeholder:"Descripción", cols: 22, rows: 3, style:"resize:none" %>
+        <%= f.text_area :descripcion, placeholder:"Descripción", cols: 22, rows: 3, style:"resize:none", class:"form-control" %>
     </div>
      <div>
         <%= label_tag(:p, "Precio en pesos:") %> <br>
-        <%= f.text_field :precio_pesos, placeholder:"Precio" %>
+        <%= f.text_field :precio_pesos, placeholder:"Precio", class:"form-control" %>
     </div>
 
     <% @producto.errors.full_messages.each do |message| %>
@@ -28,7 +28,7 @@
     <% end %>
   
     <div style="padding-top: 1em; padding-bottom: 1em">    
-      <%= f.submit "Rregistrar", class:"btn btn-primary" %>
+      <%= f.submit "Registrar", class:"btn btn-primary" %>
     </div>
   <% end %>
 
@@ -41,7 +41,7 @@
         <th>Marca</th>
         <th>Descripción</th>
         <th>Pesos</th>
-        <th>Dolares</th>
+        <th>Dólares</th>
         <th></th>
         <th></th>
       </tr>
@@ -54,7 +54,7 @@
         <td class="text-center"><%= @marca[i].nombre %></td>
         <td class="text-justify text-center"><%= producto.descripcion %></td>
         <td class="text-center">$<%= producto.precio_pesos %></td>
-        <td class="text-center"><%= producto.precio_dolares %></td>
+        <td class="text-center">$<%= (@output.to_f*producto.precio_pesos).round(2) %></td>
         <td class="text-center"><%= link_to "Modificar","productos/#{producto.id}/edit" %></td>
         <td class="text-center"><%= link_to "Eliminar","productos/delete/#{producto.id}", onclick:"confirmacion()" %></td>
       </tr>

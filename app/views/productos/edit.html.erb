@@ -6,19 +6,19 @@
      <div>
         <%= label_tag(:n, "Nombre:") %> <br>
         <%= f.hidden_field :id %>
-        <%= f.text_field :nombre, placeholder:"Nombre" %>
+        <%= f.text_field :nombre, placeholder:"Nombre", class:"form-control" %>
     </div>
     <div>
       <%= label_tag(:m, "Marca:") %> <br>
-    <%= f.select :id_marca,  options_from_collection_for_select(@marcas, 'id', 'nombre') %>
+    <%= f.select :id_marca,  options_from_collection_for_select(@marcas, 'id', 'nombre'), {}, class:"form-control" %>
     </div>
      <div>
         <%= label_tag(:d, "Descripción:") %> <br>
-        <%= f.text_area :descripcion, placeholder:"Descripción", cols: 22, rows: 3, style:"resize:none" %>
+        <%= f.text_area :descripcion, placeholder:"Descripción", cols: 22, rows: 3, style:"resize:none", class:"form-control" %>
     </div>
      <div>
         <%= label_tag(:p, "Precio en pesos:") %> <br>
-        <%= f.text_field :precio_pesos, placeholder:"Precio" %>
+        <%= f.text_field :precio_pesos, placeholder:"Precio", class:"form-control" %>
     </div>
     
     <% @producto.errors.full_messages.each do |message| %>

@@ -5,6 +5,11 @@ class ProductosController < ApplicationController
   	@suma_precios = Producto.sum("precio_pesos")
   	@marcas = Marca.select("id","nombre")
   	@producto = Producto.new
+
+  	url = URI.parse('http://www.google.com/finance/converter?a=1&from=MXN&to=USD')
+	req = Net::HTTP::Get.new(url.to_s)
+	res = Net::HTTP.start(url.host, url.port) {|http| http.request(req)}
+	@output = res.body.split("<span class=bld>")[1].split(" ")[0]
   end
 
   def show
@@ -19,11 +24,18 @@ class ProductosController < ApplicationController
   	@producto = Producto.new({nombre: params[:producto][:nombre], id_marca: params[:producto][:id_marca], descripcion: params[:producto][:descripcion], precio_pesos: params[:producto][:precio_pesos]})
   	if @producto.save
   		redirect_to "/productos"
-  	else 
+  	else
+
   		@productos = Producto.all
   		@marca = Marca.joins("INNER JOIN productos ON marcas.id = productos.id_marca")
   		@suma_precios = Producto.sum("precio_pesos")
   		@marcas = Marca.select("id","nombre")
+
+  		url = URI.parse('http://www.google.com/finance/converter?a=1&from=MXN&to=USD')
+		req = Net::HTTP::Get.new(url.to_s)
+		res = Net::HTTP.start(url.host, url.port) {|http| http.request(req)}
+		@output = res.body.split("<span class=bld>")[1].split(" ")[0]
+
   		render :index
   	end
   end

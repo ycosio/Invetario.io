@@ -7,7 +7,7 @@
   <%= form_for @marca, url: "/marca" do |f| %>
     <div>
         <%= label_tag(:l, "Nombre:") %> <br>
-        <%= f.text_field :nombre, placeholder:"Nombre" %>
+        <%= f.text_field :nombre, placeholder:"Nombre", class:"form-control" %>
     </div>
 
     <% @marca.errors.full_messages.each do |message| %>
@@ -17,7 +17,7 @@
     <% end %>
   
     <div style="padding-top: 1em">    
-      <%= f.submit "Rregistrar", class:"btn btn-primary" %>
+      <%= f.submit "Registrar", class:"btn btn-primary" %>
     </div>
   <% end %>
   

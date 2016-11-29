@@ -6,7 +6,7 @@
     <div>
         <%= label_tag(:l, "Nombre:") %> <br>
         <%= f.hidden_field :id %>
-        <%= f.text_field :nombre, placeholder:"Nombre" %>
+        <%= f.text_field :nombre, placeholder:"Nombre", class:"form-control" %>
     </div>
 
     <% @marca.errors.full_messages.each do |message| %>

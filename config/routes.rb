@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
   resources :productos
     get 'productos/delete/:id' => 'productos#delete'
-    post '/' => 'productos#index'
-    patch '/' => 'productos#index'
+    #post '/' => 'productos#index'
+    #patch '/' => 'productos#index'
 
   resources :marca
     get 'marca/delete/:id' => 'marca#delete'
-    get 'marca/:id/productos' => 'productos#index'
-    post '/' => 'marca#index'
-    patch '/' => 'marca#index'
+    #get 'marca/:id/productos' => 'productos#index'
+    #post '/' => 'marca#index'
+    #patch '/' => 'marca#index'
 
   #get 'welcome/index'
 

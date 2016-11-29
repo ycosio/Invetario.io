@@ -1,6 +1,6 @@
   <h3> <%= name %> </h3><br>
     
-  <%= form_for @marca, url: "/marca/#{id}" do |f| %>
+  <%= form_for @marca, url: "#{url}" do |f| %>
     <div>
         <%= label_tag(:l, "Nombre:") %> <br>
         <%= f.hidden_field :id %>

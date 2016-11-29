@@ -9,10 +9,17 @@
 </head>
 <body>
 
-  <ul class="nav nav-tabs">
-    <li id="menu1"><%= link_to "Marcas", root_path %></li>
-    <li id="menu2"><%= link_to "Productos", "/productos" %></li>
-  </ul>
+  <nav>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+        <span class="glyphicon glyphicon-th-list"></span> Inventario.io
+        </a>
+    </div>
+    <ul class="nav nav-tabs">
+      <li id="menu1"><%= link_to "Marcas", root_path %></li>
+      <li id="menu2"><%= link_to "Productos", "/productos" %></li>
+    </ul>
+  </nav>
 
   <%= yield %>
 

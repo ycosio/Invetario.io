@@ -1,3 +1,4 @@
+require 'net/http'
 class ProductosController < ApplicationController
    def index
   	@productos = Producto.all
@@ -57,7 +58,7 @@ class ProductosController < ApplicationController
   	@marca = Marca.joins("INNER JOIN productos ON marcas.id = productos.id_marca WHERE productos.id=#{params[:id]}")
   	if @producto.update(nombre: params[:producto][:nombre], id_marca: params[:producto][:id_marca], descripcion: params[:producto][:descripcion], precio_pesos: params[:producto][:precio_pesos])
   		redirect_to "/productos"
-  	else 
+  	else
   		render :edit
   	end
   end
